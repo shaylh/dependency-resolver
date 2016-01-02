@@ -9,6 +9,5 @@ module.exports = function (config) {
             'karma-jasmine',
             'karma-chrome-launcher'
         ]
-
     });
 };
