@@ -1,5 +1,5 @@
 {
-  "name": "dependecies-resolver",
+  "name": "dependency-tree-resolver",
   "version": "1.0.0",
   "description": "An easy-to-use library to resolve dependencies in a dependency tree",
   "author": "Shai Lachmanovich <lachmanovich@gmail.com>",
