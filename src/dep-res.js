@@ -1,9 +1,22 @@
 (function () {
     'use strict';
 
+    function includes(array, item) {
+        var length = array.length;
+        var i;
+
+        for (i = 0; i < length; i++) {
+            if (array[i] === item) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     function removeExcluded(depMap, node, exclude) {
         depMap[node] = depMap[node].filter(function (item) {
-            return !exclude.includes(item);
+            return !includes(exclude, item);
         });
     }
 
@@ -36,7 +49,7 @@
             });
         }
 
-        if (!result.includes(dependant)) {
+        if (!includes(result, dependant)) {
             result.push(dependant);
             delete depMap[dependant];
         }
