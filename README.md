@@ -14,7 +14,7 @@ var DepResolver =  require('dependency-tree-resolver');
 ```
 
 ### Browser
-Get a local copy of [dep-res.js](blob/master/src/dep-res.js), or consume it via [RawGit's CDN](https://cdn.rawgit.com/shaylh/dependency-resolver/master/src/dep-res.js),
+Get a local copy of [dep-res.js](src/dep-res.js), or consume it via [RawGit's CDN](https://cdn.rawgit.com/shaylh/dependency-resolver/master/src/dep-res.js),
 and add to your HTML:
 ```html
 <script type="text/javascript" src="dep-res.js"></script>
