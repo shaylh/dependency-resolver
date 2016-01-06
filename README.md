@@ -60,3 +60,5 @@ var resolved = DepResolver(tree);//throw error: "b" has an unknown dependency "d
 var tree = {a: ['b'], b: ['c'], c: ['a'], d: ['e'], e: ['d']};
 var resolved = DepResolver(tree);//throw error: circular dependency found: a > b > c > a
 ```
+## License
+This library is provided under the [MIT license](http://choosealicense.com/licenses/mit/).
