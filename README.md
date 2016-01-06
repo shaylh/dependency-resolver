@@ -1,8 +1,28 @@
 # dependency-resolver
 If you have a dependency tree, and you'd like to know in which order to initialize each node, this library is for you.
 
-## Usage
-Once you include the script in your project you'll have a global function ```DepResolver``` which accepts two arguments:
+## How to use
+
+### Node
+In CLI, execute 
+```
+npm i dependency-tree-resolver --save-dev
+```
+and then 
+```javascript
+var DepResolver =  require('dependency-tree-resolver');
+```
+
+### Browser
+Get a local copy of [dep-res.js](blob/master/src/dep-res.js), or consume it via [RawGit's CDN](https://cdn.rawgit.com/shaylh/dependency-resolver/master/src/dep-res.js),
+and add to your HTML:
+```html
+<script type="text/javascript" src="dep-res.js"></script>
+```
+and then you'll have ```DepResolver``` on the  ```window``` scope.
+
+## API
+Once you include the script in your project you'll have a function ```DepResolver``` which accepts two arguments:
 ```javascript
 DepResolver(
     tree = {
