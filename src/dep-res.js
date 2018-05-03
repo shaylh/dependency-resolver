@@ -39,7 +39,7 @@
     }
 
     function resolveSpecific(depMap, result, dependant, path) {
-        if (path[0] === dependant && path.length > 1) {
+        if (path.indexOf(dependant) !== path.lastIndexOf(dependant)) {
             throw new Error('circular dependency found: ' + path.join(' > '));
         }
 
