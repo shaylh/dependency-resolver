@@ -1,10 +1,10 @@
 {
   "name": "dependency-tree-resolver",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An easy-to-use library to resolve dependencies in a dependency tree",
   "author": "Shai Lachmanovich <lachmanovich@gmail.com>",
   "scripts": {
-      "test": "karma start karma.conf.js --single-run"
+    "test": "karma start karma.conf.js --single-run"
   },
   "main": "src/dep-res",
   "repository": {
