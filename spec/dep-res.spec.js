@@ -37,6 +37,11 @@ describe('Dependencies resolver', function () {
         expect(DepResolver.bind(null, depMap)).toThrow(new Error('circular dependency found: a > b > c > a'));
     });
 
+    it('should throw error if circular dependency is found for non-root item', function () {
+        depMap = {a: ['b'], b: ['c'], c: ['d'], d: ['e'], e: ['c']};
+        expect(DepResolver.bind(null, depMap)).toThrow(new Error('circular dependency found: a > b > c > d > e > c'));
+    });
+
     it('should throw error if unknown dependency is found', function () {
         depMap = {a: ['b'], b: ['d']};
         expect(DepResolver.bind(null, depMap)).toThrow(new Error('"b" has an unknown dependency "d"'));
