@@ -1,5 +1,7 @@
 describe('Dependencies resolver', function () {
 
+    let DepResolverError = DepResolver.DepResolverError;
+
     var depMap;
 
     it('should resolve shallow dep-map', function () {
@@ -34,17 +36,17 @@ describe('Dependencies resolver', function () {
 
     it('should throw error if circular dependency is found', function () {
         depMap = {a: ['b'], b: ['c'], c: ['a'], d: ['e'], e: ['d']};
-        expect(DepResolver.bind(null, depMap)).toThrow(new Error('circular dependency found: a > b > c > a'));
+        expect(DepResolver.bind(null, depMap)).toThrow(new DepResolverError('circular dependency found: a > b > c > a'));
     });
 
     it('should throw error if circular dependency is found for non-root item', function () {
         depMap = {a: ['b'], b: ['c'], c: ['d'], d: ['e'], e: ['c']};
-        expect(DepResolver.bind(null, depMap)).toThrow(new Error('circular dependency found: a > b > c > d > e > c'));
+        expect(DepResolver.bind(null, depMap)).toThrow(new DepResolverError('circular dependency found: a > b > c > d > e > c'));
     });
 
     it('should throw error if unknown dependency is found', function () {
         depMap = {a: ['b'], b: ['d']};
-        expect(DepResolver.bind(null, depMap)).toThrow(new Error('"b" has an unknown dependency "d"'));
+        expect(DepResolver.bind(null, depMap)).toThrow(new DepResolverError('"b" has an unknown dependency "d"'));
     });
 
     it('should ignore invalid dependency if explicitly excluded', function () {

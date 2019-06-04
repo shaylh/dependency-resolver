@@ -1,6 +1,12 @@
 (function () {
     'use strict';
 
+    class DepResolverError extends Error {
+        constructor() {
+            super(...arguments);
+        }
+    }
+
     function includes(array, item) {
         var length = array.length;
         var i;
@@ -22,7 +28,7 @@
 
     function validateDep(depMap, node, dependency) {
         if (!depMap.hasOwnProperty(dependency)) {
-            throw new Error('"' + node + '" has an unknown dependency "' + dependency + '"');
+            throw new DepResolverError('"' + node + '" has an unknown dependency "' + dependency + '"');
         }
     }
 
@@ -40,7 +46,7 @@
 
     function resolveSpecific(depMap, result, dependant, path) {
         if (path.indexOf(dependant) !== path.lastIndexOf(dependant)) {
-            throw new Error('circular dependency found: ' + path.join(' > '));
+            throw new DepResolverError('circular dependency found: ' + path.join(' > '));
         }
 
         if (depMap[dependant]) {
@@ -67,6 +73,8 @@
 
         return result;
     }
+
+    resolve.DepResolverError = DepResolverError;
 
     /*eslint-env node,browser*/
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
