@@ -4,7 +4,7 @@
   "description": "An easy-to-use library to resolve dependencies in a dependency tree",
   "author": "Shai Lachmanovich <lachmanovich@gmail.com>",
   "scripts": {
-    "test": "karma start karma.conf.js --single-run"
+    "test": "jasmine"
   },
   "main": "src/dep-res",
   "repository": {
@@ -13,13 +13,6 @@
   },
   "bugs": {
     "url": "hhttps://github.com/shaylh/dependency-resolver/issues"
-  },
-  "devDependencies": {
-    "karma": "~0.12.0",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-jasmine": "~0.1.0",
-    "karma-phantomjs-launcher": "^0.2.0",
-    "phantomjs": "^1.9.17"
   },
   "license": "MIT"
 }
