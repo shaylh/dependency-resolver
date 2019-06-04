@@ -7,46 +7,33 @@
         }
     }
 
-    function includes(array, item) {
-        var length = array.length;
-        var i;
-
-        for (i = 0; i < length; i++) {
-            if (array[i] === item) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function removeExcluded(depMap, node, exclude) {
+    function removeExcluded(depMap, node, excludeItems) {
         depMap[node] = depMap[node].filter(function (item) {
-            return !includes(exclude, item);
+            return !excludeItems.includes(item);
         });
     }
 
     function validateDep(depMap, node, dependency) {
         if (!depMap.hasOwnProperty(dependency)) {
-            throw new DepResolverError('"' + node + '" has an unknown dependency "' + dependency + '"');
+            throw new DepResolverError(`"${node}" has an unknown dependency "${dependency}"`);
         }
     }
 
     function validateDepMap(depMap, options) {
-        var node;
-
-        for (node in depMap) {
+        for (let node in depMap) {
+            if (!depMap.hasOwnProperty(node)) {
+                continue;
+            }
             if (options && options.exclude) {
                 removeExcluded(depMap, node, options.exclude);
             }
-
             depMap[node].forEach(validateDep.bind(null, depMap, node));
         }
     }
 
     function resolveSpecific(depMap, result, dependant, path) {
         if (path.indexOf(dependant) !== path.lastIndexOf(dependant)) {
-            throw new DepResolverError('circular dependency found: ' + path.join(' > '));
+            throw new DepResolverError(`circular dependency found: ${path.join(' > ')}`);
         }
 
         if (depMap[dependant]) {
@@ -55,19 +42,21 @@
             });
         }
 
-        if (!includes(result, dependant)) {
+        if (!result.includes(dependant)) {
             result.push(dependant);
             delete depMap[dependant];
         }
     }
 
     function resolve(depMap, options) {
-        var result = [];
-        var node;
+        let result = [];
 
         validateDepMap(depMap, options);
 
-        for (node in depMap) {
+        for (let node in depMap) {
+            if (!depMap.hasOwnProperty(node)) {
+                continue;
+            }
             resolveSpecific(depMap, result, node, [node]);
         }
 
